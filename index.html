@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TV Show Search</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="path/to/font-awesome/css/font-awesome.min.css"
+      type="style"
+    />
+  </head>
+  <style>
+    figure {
+      width: 150px;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <body>
+    <main class="container-fluid">
+      <section class="section">
+        <article class="panel is-warning">
+          <p class="panel-heading">TV Show Search</p>
+
+          <p class="panel-tabs">
+            <a class="is-active" href="index.html">Main</a>
+            <a id="about">About</a>
+            <a id="contact">Contact</a>
+          </p>
+          <!-- <div class="panel-block"> -->
+          <form id="searchForm" class="panel-block">
+            <input
+              class="input is-warning"
+              type="text"
+              placeholder="Search"
+              name="query"
+            />
+            <!-- <span class="icon is-left">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </span> -->
+            <!-- <button class="button">Tekan</button> -->
+          </form>
+          <div id="display"></div>
+        </article>
+      </section>
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <p id="about">
+            <strong>TV Show Search</strong> by
+            <a href="https://github.com/AhmadSupriyatna">Ahmad Supriyatna</a>.
+            Learn web development on a
+            <a href="https://www.udemy.com/">Udemy</a>
+            Course with a lecture from
+            <a href="https://www.udemy.com/user/coltsteele/">Colt Steele</a>.
+          </p>
+        </div>
+      </footer>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
