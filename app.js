@@ -1,85 +1,88 @@
 const form = document.querySelector('#searchForm');
 const display = document.querySelector('#display')
 
+// menambahkan event pada form search
 form.addEventListener('submit', async (e) => {
-    e.preventDefault()
-    const searchTerm = form.elements.query.value
-    reset()
-    search(searchTerm)
+  e.preventDefault()
+  const searchTerm = form.elements.query.value
+  reset()
+  search(searchTerm)
 
 })
 
-
+// funngsi untuk  menangkap data dari API
 async function search(searchForm) {
-    try {
-        const config = { params: { q: searchForm } }
-        const res = await axios.get('https://api.tvmaze.com/search/shows', config)
-        const shows = res.data
-        for (const data of shows) {
+  try {
+    const config = { params: { q: searchForm } }
+    const res = await axios.get('https://api.tvmaze.com/search/shows', config)
+    const shows = res.data
+    for (const data of shows) {
 
-            content(data.show)
-        }
-    } catch (error) {
-        console.log("Aku Pusing dah", error)
+      content(data.show)
     }
+  } catch (error) {
+    console.log("data Not Found", error)
+  }
 }
-
+// funsi untuk menampilkan ke antarmuka
 function content(data) {
-    const article = document.createElement('ARTICLE');
-    const newFig = document.createElement('FIGURE');
-    const subFig = document.createElement('DIV');
-    const img = document.createElement('IMG');
+  const article = document.createElement('ARTICLE');
+  const newFig = document.createElement('FIGURE');
+  const subFig = document.createElement('DIV');
+  const img = document.createElement('IMG');
 
-    const media = document.createElement('DIV');
-    const content = document.createElement('DIV');
-    const p = document.createElement('P');
+  const media = document.createElement('DIV');
+  const content = document.createElement('DIV');
+  const p = document.createElement('P');
 
 
-    article.classList.add('media', 'panel-block');
-    newFig.classList.add('media-left', "is-hidden-mobile");
-    subFig.classList.add('image', 'is-4by5');
+  article.classList.add('media', 'panel-block');
+  newFig.classList.add('media-left', "is-hidden-mobile");
+  subFig.classList.add('image', 'is-4by5');
 
-    media.classList.add('media-content')
-    content.classList.add('content')
-    let rating = ""
-    if (data.rating.average != null) {
-        rating = data.rating.average
-    } else {
-        rating = "-"
-    }
-    p.innerHTML = `<strong>${data.name}</strong> <br/> <small>Rating ${rating}</small> <br/> ${data.summary} `
-    const gambar = "https://rimatour.com/wp-content/uploads/2017/09/No-image-found.jpg";
-    if (data.image == null) {
-        img.src = gambar;
-    } else {
-        img.src = data.image.medium
-    }
-    display.append(article);
-    article.append(newFig);
-    newFig.append(subFig);
-    subFig.append(img)
-    article.append(media)
-    media.append(content)
-    content.append(p)
+  media.classList.add('media-content')
+  content.classList.add('content')
+  let rating = ""
+  if (data.rating.average != null) {
+    rating = data.rating.average
+  } else {
+    rating = "-"
+  }
+  p.innerHTML = `<strong>${data.name}</strong> <br/> <small>Rating ${rating}</small> <br/> ${data.summary} `
+  const gambar = "https://rimatour.com/wp-content/uploads/2017/09/No-image-found.jpg";
+  if (data.image == null) {
+    img.src = gambar;
+  } else {
+    img.src = data.image.medium
+  }
+  display.append(article);
+  article.append(newFig);
+  newFig.append(subFig);
+  subFig.append(img)
+  article.append(media)
+  media.append(content)
+  content.append(p)
 
 }
 
+// untuk mereset tampilan agar tidak menumpuk
 function reset() {
-    let article = document.querySelectorAll('article.media');
-    if (article.length > 0) {
-        for (let i = 0; i < article.length; i++)
-            article[i].remove()
-    }
+  let article = document.querySelectorAll('article.media');
+  if (article.length > 0) {
+    for (let i = 0; i < article.length; i++)
+      article[i].remove()
+  }
 }
 
-// contact
+// menu contact
 const contact = document.querySelector('#contact')
-const about = document.querySelector('#about')
 contact.addEventListener('click', menuContact)
+// menu about
+const about = document.querySelector('#about')
 about.addEventListener('click', menuAbout)
 function menuContact() {
-    const profile = document.createElement('DIV');
-    profile.innerHTML = `<section class="hero is-success is-halfheight">
+  const profile = document.createElement('DIV');
+  profile.innerHTML = `<section class="hero is-success is-halfheight">
     <div class="hero-body">
       <div class="">
         <p class="title">Ahmad Supriyatna</p>
@@ -105,11 +108,11 @@ function menuContact() {
       </div>
     </div>
   </section>`
-    display.append(profile)
+  display.append(profile)
 }
 function menuAbout() {
-    const profile = document.createElement('ARTICLE');
-    profile.innerHTML = `<section class="hero is-danger is-halfheight">
+  const profile = document.createElement('ARTICLE');
+  profile.innerHTML = `<section class="hero is-danger is-halfheight">
     <div class="hero-body">
       <div class="">
         <p class="title">TV Show Search</p>
@@ -137,5 +140,5 @@ function menuAbout() {
       </div>
     </div>
   </section>`
-    display.append(profile)
+  display.append(profile)
 }
